@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Paper, Stack, Text, Title } from '@mantine/core';
+import { Box, Container, Paper, Stack, Text, Title } from '@mantine/core';
 import { schemaResolver, useForm } from '@mantine/form';
 import { samplePatient } from './samplePatient';
 import { assessmentSchema, type Assessment } from './schema';
@@ -61,26 +61,51 @@ export function AssessmentForm({ onSave }: AssessmentFormProps) {
   };
 
   return (
-    <Container size="sm" py="xl">
-      <Paper withBorder shadow="sm" p="xl" radius="md">
-        <Title order={2} mb={4}>
-          Geriatric Care Assessment
-        </Title>
-        <Text size="sm" c="dimmed" mb="lg">
-          In-home Clinical Assessment for Elderly Patients
-        </Text>
+    <Container size="sm" py={{ base: 'md', sm: 'xl' }}>
+      <Paper
+        withBorder
+        shadow="xs"
+        radius="sm"
+        style={{
+          backgroundColor: '#ffffff',
+          borderColor: '#cbd5e1',
+          overflow: 'hidden',
+        }}
+      >
+        <Box
+          bg="#0b2545"
+          px={{ base: 'md', sm: 'xl' }}
+          py={{ base: 'md', sm: 'lg' }}
+          style={{ borderBottom: '3px solid #134074' }}
+        >
+          <Title order={2} c="white" fw={700} fz={{ base: 20, sm: 22 }}>
+            Geriatric Care Assessment
+          </Title>
+          <Text
+            size="xs"
+            c="#8da9c4"
+            mt={2}
+            fw={500}
+            tt="uppercase"
+            style={{ letterSpacing: '0.8px' }}
+          >
+            In-Home Clinical Assessment & Protocol Record
+          </Text>
+        </Box>
 
-        <form onSubmit={handleFormSubmit} noValidate>
-          <Stack gap="md">
-            <AssessmentFields form={form} />
-            <AssessmentActions
-              onLoadSample={handleLoadSample}
-              isSaving={isSaving}
-            />
-          </Stack>
-        </form>
+        <Box p={{ base: 'md', sm: 'xl' }}>
+          <form onSubmit={handleFormSubmit} noValidate>
+            <Stack gap="lg">
+              <AssessmentFields form={form} />
+              <AssessmentActions
+                onLoadSample={handleLoadSample}
+                isSaving={isSaving}
+              />
+            </Stack>
+          </form>
 
-        {savedAssessment && <AssessmentResult assessment={savedAssessment} />}
+          {savedAssessment && <AssessmentResult assessment={savedAssessment} />}
+        </Box>
       </Paper>
     </Container>
   );

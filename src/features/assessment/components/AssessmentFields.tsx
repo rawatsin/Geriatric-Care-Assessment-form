@@ -1,4 +1,4 @@
-import { Checkbox, NumberInput, Select, TextInput } from '@mantine/core';
+import { Box, Checkbox, Divider, NumberInput, Select, Text, TextInput } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import type { UseFormReturnType } from '@mantine/form';
 import dayjs from 'dayjs';
@@ -28,6 +28,19 @@ const mobilityOptions = MOBILITY.map((value) => ({
 export function AssessmentFields({ form }: AssessmentFieldsProps) {
   return (
     <>
+      <Box mb={-4}>
+        <Text
+          fw={800}
+          size="xs"
+          c="#0b2545"
+          tt="uppercase"
+          style={{ letterSpacing: '0.8px' }}
+        >
+          1. Patient Identification
+        </Text>
+        <Divider color="#d8d3c9" mt={4} />
+      </Box>
+
       <TextInput
         label="Medical record number"
         placeholder="MRN-004821"
@@ -47,6 +60,19 @@ export function AssessmentFields({ form }: AssessmentFieldsProps) {
         key={form.key('dateOfBirth')}
         {...form.getInputProps('dateOfBirth')}
       />
+
+      <Box mb={-4} mt="xs">
+        <Text
+          fw={800}
+          size="xs"
+          c="#0b2545"
+          tt="uppercase"
+          style={{ letterSpacing: '0.8px' }}
+        >
+          2. Clinical Evaluation & Mobility
+        </Text>
+        <Divider color="#d8d3c9" mt={4} />
+      </Box>
 
       <DateInput
         label="Assessment date"
@@ -88,6 +114,19 @@ export function AssessmentFields({ form }: AssessmentFieldsProps) {
         key={form.key('pharmacistReviewRequested')}
         {...form.getInputProps('pharmacistReviewRequested', { type: 'checkbox' })}
       />
+
+      <Box mb={-4} mt="xs">
+        <Text
+          fw={800}
+          size="xs"
+          c="#0b2545"
+          tt="uppercase"
+          style={{ letterSpacing: '0.8px' }}
+        >
+          3. Follow-Up & Patient Consent
+        </Text>
+        <Divider color="#d8d3c9" mt={4} />
+      </Box>
 
       <DateInput
         label="Next review date"
