@@ -67,8 +67,8 @@ export function AssessmentForm({ onSave }: AssessmentFormProps) {
         shadow="xs"
         radius="sm"
         style={{
-          backgroundColor: '#ffffff',
-          borderColor: '#cbd5e1',
+          backgroundColor: '#faf8f5',
+          borderColor: '#d8d3c9',
           overflow: 'hidden',
         }}
       >
