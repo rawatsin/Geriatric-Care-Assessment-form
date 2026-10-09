@@ -4,7 +4,7 @@ A single-page in-home Geriatric Care Assessment form application designed for vi
 
 ## Deployment
 
-- **Live Application URL**: `[DEPLOYMENT_URL_PLACEHOLDER]`
+- **Live Application URL**: [Geriatric Care Assessment Form](https://geriatric-care-assessment-form-orpin.vercel.app/)
 
 ---
 
