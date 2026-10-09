@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Paper, Stack, Title } from '@mantine/core';
+import { Container, Paper, Stack, Text, Title } from '@mantine/core';
 import { schemaResolver, useForm } from '@mantine/form';
 import { samplePatient } from './samplePatient';
 import { assessmentSchema, type Assessment } from './schema';
@@ -37,6 +37,7 @@ export function AssessmentForm({ onSave }: AssessmentFormProps) {
   });
 
   const handleSubmit = async (values: FormValues) => {
+    setSavedAssessment(null);
     const parsed = assessmentSchema.parse(values);
     setIsSaving(true);
     try {
@@ -48,7 +49,13 @@ export function AssessmentForm({ onSave }: AssessmentFormProps) {
     }
   };
 
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setSavedAssessment(null);
+    form.onSubmit(handleSubmit)(event);
+  };
+
   const handleLoadSample = () => {
+    setSavedAssessment(null);
     form.setValues(samplePatient);
     form.clearErrors();
   };
@@ -56,11 +63,14 @@ export function AssessmentForm({ onSave }: AssessmentFormProps) {
   return (
     <Container size="sm" py="xl">
       <Paper withBorder shadow="sm" p="xl" radius="md">
-        <Title order={2} mb="lg">
+        <Title order={2} mb={4}>
           Geriatric Care Assessment
         </Title>
+        <Text size="sm" c="dimmed" mb="lg">
+          In-home Clinical Assessment for Elderly Patients
+        </Text>
 
-        <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
+        <form onSubmit={handleFormSubmit} noValidate>
           <Stack gap="md">
             <AssessmentFields form={form} />
             <AssessmentActions

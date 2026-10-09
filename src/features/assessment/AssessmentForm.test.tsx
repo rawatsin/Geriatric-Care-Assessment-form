@@ -62,5 +62,46 @@ describe('Geriatric Assessment Form', () => {
         { timeout: 3000 }
       );
     });
+
+    it('hides existing success alert immediately on resubmit and shows it again after save', async () => {
+      const handleSave = vi.fn();
+
+      render(
+        <MantineProvider>
+          <AssessmentForm onSave={handleSave} />
+        </MantineProvider>
+      );
+
+      const loadButton = screen.getByRole('button', {
+        name: /load sample patient/i,
+      });
+      fireEvent.click(loadButton);
+
+      const submitButton = screen.getByRole('button', {
+        name: /save assessment/i,
+      });
+      fireEvent.click(submitButton);
+
+      await waitFor(
+        () => {
+          expect(screen.getByText('Assessment Saved')).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
+
+      // Click submit again
+      fireEvent.click(submitButton);
+
+      // Alert should be hidden immediately
+      expect(screen.queryByText('Assessment Saved')).not.toBeInTheDocument();
+
+      // And reappear after save completes
+      await waitFor(
+        () => {
+          expect(screen.getByText('Assessment Saved')).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
+    });
   });
 });
